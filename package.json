@@ -1,0 +1,19 @@
+{
+  "name": "timelivechallenge",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndersonSouzax/timeLiveChallenge.git"
+  },
+  "author": "Anderson souza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndersonSouzax/timeLiveChallenge/issues"
+  },
+  "homepage": "https://github.com/AndersonSouzax/timeLiveChallenge#readme"
+}
