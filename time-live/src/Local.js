@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import './Local.css';
 
 class Local extends Component {
 
@@ -17,7 +18,7 @@ class Local extends Component {
     //Objeto global
     let L = window.L;
     
-    let map = L.map('map').setView([51.505, -0.09], 12);
+    let map = L.map('map').setView([-3.731862,-38.526669], 13);
 
     //Exemplo pego da página oficial do leaflet
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
@@ -32,6 +33,7 @@ class Local extends Component {
       <div className="App">
         <header className="App-header">
     {token}
+        <h2 className="local-tit">Selecione sua localização no mapa para encontrar amigos</h2>
         </header>
 
       </div>

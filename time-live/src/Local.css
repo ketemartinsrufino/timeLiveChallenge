@@ -1,7 +1,12 @@
 #map{
-	height: 400px;
+	max-height: 50%;
 }
 
-.App-header{
-	height: 100px;
+.App{
+	height: 200px !important;
+}
+
+.App-header .local-tit{
+	position: relative;
+	top: 25%;
 }
