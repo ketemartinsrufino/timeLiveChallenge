@@ -1,19 +1,23 @@
-import { call, put } from 'redux-saga/effects'
+import { call, put, select,all,take } from 'redux-saga/effects'
 import InstaAPI from './InstaAPI';
 
-function* getFirstPageInfo(token, coords) {
+function* getFirstPageInfo(coords) {
 	
 	try{
 
-		const locations = yeld call(InstaAPI.getLocations,token,coords);
+		yield take('GET_FIRST_INFO');
+debugger;
+		const token = yield select( state => state.token);
+debugger;
+		const locations = yield call(InstaAPI.getLocations,token,coords);
 
-		yeld put({ 'type' : 'SET_LOCATIONS', 'locations' : locations });
+		yield put({ 'type' : 'SET_LOCATIONS', 'locations' : locations });
 
-		const data = yeld call(InstaAPI.getLocationsData,token,locations);
+		const data = yield call(InstaAPI.getLocationsData,token,locations);
 
-		yeld put({ 'type' : 'SET_RECENT_LOCATION_MEDIA', 'recentLocationsMedia' : data });
+		yield put({ 'type' : 'SET_RECENT_LOCATION_MEDIA', 'recentLocationsMedia' : data });
 
-		const fol = yeld call(InstaAPI.getFollowedBy, token);
+		const fol = yield call(InstaAPI.getFollowedBy, token);
 
 		let followers = [];
 
@@ -27,15 +31,15 @@ function* getFirstPageInfo(token, coords) {
 
 					if( fol[i].id == el.user.id ){
 						
-						//Incluindo junto a informação do usuario a localização
-						followers.push( Object..assign({},fol[i], ele.location ));
+						//Incluindo junto a informação do usuario, a localização
+						followers.push( Object.assign({},fol[i], el.location ));
 					}	
 				}
 				
 			});
 		});
 
-		yeld put({ 'type' : 'SET_FOLLOWERS', 'followers' : followers });
+		yield put({ 'type' : 'SET_FOLLOWERS', 'followers' : followers });
 
 	}catch(e){
 		console.log('error' + e.message);
@@ -45,6 +49,29 @@ function* getFirstPageInfo(token, coords) {
 function* getSecondPageInfo(token, coords){
 	try{
 
+		const media = yield call(InstaAPI.getMedia, token, coords);
+
+		const friends = yield select( state => state.followers);
+
+		let friPosts = [];
+
+		media.forEach( (el, ind, arr) => {
+
+			let i = 0, j = friends.length;
+
+			for(i; i < j; i++){
+
+				if(el.user.id == friends[i].id){
+
+					let media = el.type == 'image' ? el.images : el.videos;
+
+					friPosts.push( { 'type' : el.type , 'media' : media });
+
+				}
+			}
+		});
+
+		yield friPosts;
 
 	}catch(e){
 

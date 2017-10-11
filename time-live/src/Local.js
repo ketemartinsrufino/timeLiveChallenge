@@ -32,6 +32,22 @@ class Local extends Component {
       id: 'mapbox.streets'
     }).addTo(map);
 
+    let marker = false;
+
+    map.on('click', function(event){
+
+        //Limpando anterior
+        if(marker){
+          map.removeLayer(marker);
+        }
+
+        marker = L.marker(event.latlng);
+        map.addLayer(marker);
+
+    });
+
+    
+
     return (
       <div className="App">
         <header className="App-header">

@@ -41,6 +41,8 @@ function mainReducer(state = InitialUser, action){
 		    	followers: action.followers
 		  	})
 
+
+
 		default:
 		return state;
 

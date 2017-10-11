@@ -37,12 +37,12 @@ class InstaAPI{
     static getFollowedBy(token){
 
     	return axios.get(`https://api.instagram.com/v1/users/self/followed-by?access_token=${token}`)
-    				.then( res => return res.data );
+    				.then( res => { return res.data } );
     }
 
     static getMedia(token, coord = [-3.731862, -38.526669]){
     	return axios.get(`https://api.instagram.com/v1/media/search?lat=${coord[0]}&lng=${coord[1]}&access_token=${token}`)
-    				.then( res => return res.data );
+    				.then( res => { return res.data }  );
 
     }
 
