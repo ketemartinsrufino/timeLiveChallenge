@@ -9,13 +9,16 @@ class Local extends Component {
     let sub = window.location.hash;
     let token = '';
 
+    //Mostrando o mapa inicialmente oculto
+    document.getElementById('map').style.display = 'block';
+
     //Se retornado um token
     if(sub.indexOf('token') !=  -1){
 
       token = sub.substring( sub.indexOf('=') + 1);
     }
 
-    //Objeto global
+    //Objeto global do mapa
     let L = window.L;
     
     let map = L.map('map').setView([-3.731862,-38.526669], 13);

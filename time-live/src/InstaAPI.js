@@ -1,28 +1,53 @@
 import axios from 'axios';
 
 class InstaAPI{
+     
+    static getLocations(token, coord = [-3.731862, -38.526669]){
 
-	//Pegando id do lugar a partir das coordenadas
-	static getFacePlaceId(token,coord = [-3.731862, -38.526669]){
+    	let url = `https://api.instagram.com/v1/locations/search?
+    			   lat=${coord[0]}&lng=${coord[1]}&access_token=token&distance=600`;
 
-		let url = `https://graph.facebook.com/search?q=&type=place&center=${coord[0]},${coord[1]}
-					&distance=5000&access_token=${token}&expires_in=5184000`;
-		return axios.get(url);
-	}
+    	return axios.get(url);
 
-	static getInstaPlaceId(token, placeId){
+    }
 
-		if(token && placeId){
+    static getLocationsData(token,locations = []){
 
-		let url = `https//:api.instagram.com/v1/locations/search?facebook_places_id=${placeId}
-				&access_token=${token}`;
+    	if(locations.length  > 0 && token){
 
-		 return axios.get(url);
-		}
+    		var proms = [];
 
-	}
+    		locations.forEach( (el,ind,arr) => {
 
-	// Medias recentes a partir de um local
-	// https://api.instagram.com/v1/locations/514276/media/recent?access_token=ACCESS-TOKEN
+    			let req = `https://api.instagram.com/v1/locations/${el.id}/
+    					   media/recent?access_token=${token}`;
+
+    			proms.push(axios.get(req).then( res => { return res.data; } ));
+    		});
+
+    		/* Retonando os resultados de todas
+    		   As requisições */
+    		return Promise.all(proms);
+
+    	}else{
+    		return [];
+    	}
+    }
+
+    static getFollowedBy(token){
+
+    	return axios.get(`https://api.instagram.com/v1/users/self/followed-by?access_token=${token}`)
+    				.then( res => return res.data );
+    }
+
+    static getMedia(token, coord = [-3.731862, -38.526669]){
+    	return axios.get(`https://api.instagram.com/v1/media/search?lat=${coord[0]}&lng=${coord[1]}&access_token=${token}`)
+    				.then( res => return res.data );
+
+    }
 
 }
+
+export default InstaAPI;
+
+
