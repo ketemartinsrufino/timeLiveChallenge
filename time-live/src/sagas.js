@@ -6,17 +6,16 @@ function* getFirstPageInfo() {
 	try{
 
 		yield take('COORD_SET');
-debugger;
+
 		const token = yield select( state => state.token);
 		const coords = yield select( state => state.coord);
 
-debugger;
 		const locations = yield call(InstaAPI.getLocations,token,coords);
-debugger;
+
 		yield put({ 'type' : 'SET_LOCATIONS', 'locations' : locations });
 
 		const data = yield call(InstaAPI.getLocationsData,token,locations);
-debugger;
+
 		yield put({ 'type' : 'SET_RECENT_LOCATION_MEDIA', 'recentLocationsMedia' : data });
 
 		const fol = yield call(InstaAPI.getFollowedBy, token);

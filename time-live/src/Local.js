@@ -18,7 +18,7 @@ let localComp = ({ dispatch }) => {
       dispatch( {'type' : 'SET_TOKEN', 'token' : token } );
 
     }
-console.log(store.getState());
+
 
   return(
 
