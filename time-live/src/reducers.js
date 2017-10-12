@@ -3,9 +3,7 @@ const InitialUser = {
 	coord : [],
 	locations : [],
 	recentLocationsMedia: [],
-	followers : [ {'profile_picture' : 'https://vignette2.wikia.nocookie.net/naruto/images/8/87/Chibi_Naruto_Perfil_da_Slytherin_Keeper.png/revision/latest?cb=20170512042300&path-prefix=pt-br',
-					'location' : { 'latitude' : -3.731862 , 'longitude' : -38.526669 },
-					'username' : 'Naruto', 'id' : 234234 } ],
+	followers : [],
 	folPosts : [],
 }
 
