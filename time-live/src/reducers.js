@@ -3,7 +3,10 @@ const InitialUser = {
 	coord : [],
 	locations : [],
 	recentLocationsMedia: [],
-	followers : []
+	followers : [ {'profile_picture' : 'https://vignette2.wikia.nocookie.net/naruto/images/8/87/Chibi_Naruto_Perfil_da_Slytherin_Keeper.png/revision/latest?cb=20170512042300&path-prefix=pt-br',
+					'location' : { 'latitude' : -3.731862 , 'longitude' : -38.526669 },
+					'username' : 'Naruto', 'id' : 234234 } ],
+	folPosts : [],
 }
 
 
@@ -41,21 +44,24 @@ function mainReducer(state = InitialUser, action){
 		    	followers: action.followers
 		  	})
 
+		case 'SET_FOL_POSTS':
 
+			return Object.assign({}, state, {
+		    	folPosts: action.folPosts
+		  	})
+
+		case 'COORD_SET':
+
+			return state;
+
+		case 'GET_FOLLOWERS':
+
+			return state.followers;
 
 		default:
 		return state;
 
 	}
 }
-
-
-// function todoUserArrays(state = [], action){
-// 	switch(action.type){
-		
-// 	}
-// }
-
-// const todoApp = combineReducers({ todoUser, todoUserArrays});
 
 export default mainReducer;

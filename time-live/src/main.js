@@ -13,6 +13,6 @@ const store = createStore(
 
 sagaMiddleware.run(rootSaga);
 
-store.dispatch('GET_FIRST_INFO');
+//store.dispatch('GET_FIRST_INFO');
 
 export default store;

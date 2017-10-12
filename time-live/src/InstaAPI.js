@@ -2,10 +2,9 @@ import axios from 'axios';
 
 class InstaAPI{
      
-    static getLocations(token, coord = [-3.731862, -38.526669]){
+    static getLocations(token,coord = [-3.731862, -38.526669]){
 
-    	let url = `https://api.instagram.com/v1/locations/search?
-    			   lat=${coord[0]}&lng=${coord[1]}&access_token=token&distance=600`;
+    	let url = `https://api.instagram.com/v1/locations/search?lat=${coord[0]}&lng=${coord[1]}&access_token=${token}`;
 
     	return axios.get(url);
 
@@ -19,8 +18,7 @@ class InstaAPI{
 
     		locations.forEach( (el,ind,arr) => {
 
-    			let req = `https://api.instagram.com/v1/locations/${el.id}/
-    					   media/recent?access_token=${token}`;
+    			let req = `https://api.instagram.com/v1/locations/${el.id}/media/recent?access_token=${token}`;
 
     			proms.push(axios.get(req).then( res => { return res.data; } ));
     		});

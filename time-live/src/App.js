@@ -8,6 +8,7 @@ class App extends Component {
     let redirect = 'http://localhost:3000/local';
     let imgSrc = 'http://hitsfm100.com.br/images/instagram.png';
     let authSrc = `https://api.instagram.com/oauth/authorize/?client_id=${key}&redirect_uri=${redirect}&response_type=token`;
+    
     return (
       <div className="App">
         <header className="App-header">

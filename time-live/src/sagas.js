@@ -1,20 +1,22 @@
 import { call, put, select,all,take } from 'redux-saga/effects'
 import InstaAPI from './InstaAPI';
 
-function* getFirstPageInfo(coords) {
+function* getFirstPageInfo() {
 	
 	try{
 
-		yield take('GET_FIRST_INFO');
+		yield take('COORD_SET');
 debugger;
 		const token = yield select( state => state.token);
+		const coords = yield select( state => state.coord);
+
 debugger;
 		const locations = yield call(InstaAPI.getLocations,token,coords);
-
+debugger;
 		yield put({ 'type' : 'SET_LOCATIONS', 'locations' : locations });
 
 		const data = yield call(InstaAPI.getLocationsData,token,locations);
-
+debugger;
 		yield put({ 'type' : 'SET_RECENT_LOCATION_MEDIA', 'recentLocationsMedia' : data });
 
 		const fol = yield call(InstaAPI.getFollowedBy, token);
@@ -46,8 +48,11 @@ debugger;
 	}
 }
 
-function* getSecondPageInfo(token, coords){
+function* getSecondPageInfo(){
 	try{
+
+		const token = yield select( state => state.token);
+		const coords = yield select( state => state.coord);
 
 		const media = yield call(InstaAPI.getMedia, token, coords);
 
@@ -71,7 +76,7 @@ function* getSecondPageInfo(token, coords){
 			}
 		});
 
-		yield friPosts;
+		yield put({ 'type' : 'SET_FOL_POSTS', 'folPosts' : friPosts });
 
 	}catch(e){
 

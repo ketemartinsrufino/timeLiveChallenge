@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
+//Componente de amostra das imagens e vídeos...
 class Mosaic extends Component{
 
 	render(){
